@@ -16,8 +16,8 @@ with DAG(
         task_id= 'regist_t2',
         python_callable=regist2,
         op_args=['gypark', 'man', 'kr', 'seoul'],
-        op_kwargs= {'country': 'kr',
-                  'city': 'seoul' }
+        op_kwargs= {'email': 'random email',
+                  'phone': '4554058' }
                 
     )
     
