@@ -24,4 +24,3 @@ with DAG(
         bash_command='echo "START_DATE: $START_DATE" && echo "END_DATE: $END_DATE"',
     )
 
-    bash_task_2 
