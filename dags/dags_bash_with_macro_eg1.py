@@ -21,10 +21,9 @@ with DAG(
         task_id='bash_task_1',
         env={
             'START_DATE' : '{{ data_interval_start.in_time_zone("Asia/Seoul") | ds}}',
-            'END_DATE' : '{{ data_interval_end.in_time_zone("Asia/Seoul") - macros.relativetimedelta.relativetimedelta(days=1) | ds}}',
+            'END_DATE' : '{{ data_interval_end.in_time_zone("Asia/Seoul") - macros.dateutil.relativetimedelta.relativetimedelta(days=1) | ds}}',
         },
         bash_command='echo "START_DATE: $START_DATE" && echo "END_DATE: $END_DATE"',
     )
 
 
-    bash_task_1 
