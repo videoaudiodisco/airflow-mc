@@ -21,6 +21,8 @@ with DAG(
                 "{{ ti.xcom_push(key='bash_pushed', value='first_bash_message')}} &&"
                 "echo complete"
     )
+    ## bash echo를 한 경우 맨 마지막 값이 함수의 return 값으로 xcom_push에 저장됨
+    ## 즉, 다음 함수에서 task_ids를 통해 xcom_pull을 할 경우, echo complete이 return_value로 저장됨
 
     bash_pull = BashOperator(
         task_id='bash_pull',
