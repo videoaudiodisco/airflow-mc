@@ -12,7 +12,7 @@ with DAG(
     catchup=False
 ) as dag:
 
-    @task(task_id = 'soemthing_task')
+    @task(task_id = 'something_task')
     def some_logic(**kwargs):
         from random import choice
         return choice(['good', 'bad'])
@@ -22,7 +22,7 @@ with DAG(
         to = 'gyungyoonpark@gmail.com',
         subject = '{{ data_interval_end.in_timezone("Asia/Seoul") | ds }} some_logic 처리 결과' ,
         html_content = '{{ data_interval_end.in_timezone("Asia/Seoul") | ds }} some_logic 처리 결과는 <br> \
-            {{ ti.xcom_pull(task_ids="some_logic") }} 입니다. <br>',
+            {{ ti.xcom_pull(task_ids="something_task") }} 입니다. <br>',
         # task id로 xcom_pull 을 하면 해당 task_id의 return 값이 들어감
     )
 
