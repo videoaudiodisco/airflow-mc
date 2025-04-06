@@ -18,8 +18,8 @@ with DAG(
         return choice(['good', 'bad'])
     
     send_email = EmailOperator(
-        task_id = 'send_email'
-        to = 'gyungyoonpark@gmail.com'
+        task_id = 'send_email',
+        to = 'gyungyoonpark@gmail.com',
         subject = '{{ data_interval_end.in_timezone("Asia/Seoul") | ds }} some_logic 처리 결과' ,
         html_content = '{{ data_interval_end.in_timezone("Asia/Seoul") | ds }} some_logic 처리 결과는 <br> \
             {{ ti.xcom_pull(task_ids="some_logic") }} 입니다. <br>',
