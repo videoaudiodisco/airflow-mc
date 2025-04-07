@@ -5,12 +5,14 @@ from airflow.operators.python import PythonOperator, BranchPythonOperator
 
 
 with DAG(
-    dag_id="dags_branch_python_operator",
+    dag_id="dags_python_with_branch_decorator",
     schedule="30 6 * * *",
     start_date=pendulum.datetime(2025, 4, 1, tz="Asia/Seoul"),
     catchup=False,
 ) as dag:
     
+    # task decorator를 사용하여 BranchPythonOperator를 생성
+    @task.branch(task_id='python_branch_task')
     def select_random():
         import random
         item_list = ['A', 'B', 'C']
@@ -21,14 +23,6 @@ with DAG(
         elif selected_item in ['B', 'C']:
             return ['task_b', 'task_c']
         
-    ## BranchPythonOperator에 들어가는 python_callable은 return 으로 task_id를 return
-    ## 그 아래에는 각각의 task_id를 지니는 PythonOperator가 존재해야 함
-        
-    python_branch_task = BranchPythonOperator(
-        task_id='python_branch_task',
-        python_callable=select_random,
-    )
-
     def common_func(**kwargs):
         print(kwargs['selected'])
 
@@ -50,4 +44,4 @@ with DAG(
         op_kwargs={'selected': 'C'},
     )   
 
-    python_branch_task >> [task_a, task_b, task_c]
+    select_random() >> [task_a, task_b, task_c]
