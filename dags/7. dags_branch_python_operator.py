@@ -18,7 +18,7 @@ with DAG(
 
         if selected_item == 'A':
             return 'task_a'
-        elif selected_item == ['B', 'C']:
+        elif selected_item in ['B', 'C']:
             return ['task_b', 'task_c']
         
     python_branch_task = BranchPythonOperator(
