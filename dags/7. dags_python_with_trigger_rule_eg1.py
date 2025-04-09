@@ -27,8 +27,10 @@ with DAG(
     def python_upstream_2():
         print("python upstream 2")
 
-    @task(task_id = 'python_downstream_1'. trigger_rule='all_done')
+    @task(task_id = 'python_downstream_1', trigger_rule='all_done')
     def python_downstream_1():
         print("python downstream 1")
 
     [bash_upstream_1, python_upstream_1(), python_upstream_2()] >> python_downstream_1()
+
+    # python_downstream_1 이 all_done 이므로, 위에서 하나가 실패가 나도 돌아갈 것

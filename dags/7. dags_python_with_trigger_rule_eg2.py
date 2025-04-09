@@ -42,3 +42,5 @@ with DAG(
         print('task_D 정상처리')
 
     random_branch() >> [task_a, task_b(), task_c()] >> task_d()
+    # task_d는 task_a, task_b, task_c 중 하나라도 skipped가 나면 실행되지 않음
+    # 근데 random_branch는 A, B, C 중 1개만 실행하고, 나머지 2개는 skipped가 됨 --> task_d는 실행되지 않음
