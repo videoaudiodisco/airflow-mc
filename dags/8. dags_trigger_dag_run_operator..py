@@ -19,8 +19,8 @@ with DAG(
     trigger_dag_task = TriggerDagRunOperator(
         task_id = 'trigger_dag_task',
         trigger_dag_id= 'dags_python_operator', # 이 task가 trigger 하는 dag
-        trigger_run_id= None, # None이면 자동으로 run_id가 생성됨
-        execution_date=' {{ data_interval_start}}',
+        trigger_run_id= None, # None이면 자동으로 run_id가 생성됨 --> manual로 나온다. 
+        execution_date= '{{data_interval_start}}',
         reset_dag_run=True, # True이면 trigger_dag_id의 dag_run이 reset됨
         wait_for_completion=False, # True이면 trigger_dag_id의 dag_run이 완료될 때까지 대기함
         poke_interval=60, 
