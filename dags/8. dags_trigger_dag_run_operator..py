@@ -18,7 +18,8 @@ with DAG(
 
     trigger_dag_task = TriggerDagRunOperator(
         task_id='trigger_dag_task',
-        trigger_dag_id='dags_python_operator',
+        # trigger_dag_id='dags_python_operator',
+        trigger_dag_id = 'dags_email_operator',
         trigger_run_id=None,
         execution_date='{{data_interval_start}}',
         reset_dag_run=True,
