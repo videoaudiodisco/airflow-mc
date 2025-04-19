@@ -13,6 +13,8 @@ with DAG(
 ) as dag:
 
     '''서울시 공공자전거 대여소 정보'''
+    # airflow variable 등록할때 host를 http://openapi.seoul.go.kr:8088/	 로 등록해야 한다. (뒤에 :8088/ 붙여야 함)
+    # port도 8088 로 입력
     tb_cycle_station_info = HttpOperator(
         task_id='tb_cycle_station_info',
         http_conn_id='openapi.seoul.go.kr',
