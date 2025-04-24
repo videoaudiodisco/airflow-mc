@@ -34,7 +34,8 @@ with DAG(
         trigger_dag_id= 'dags_python_operator', # 이 task가 trigger 하는 dag
         trigger_run_id= None, # None이면 자동으로 run_id가 생성됨 --> manual로 나온다. 
         execution_date= '{{data_interval_start}}',
-        reset_dag_run=True, # True이면 trigger_dag_id의 dag_run이 reset됨
+        # run id 가 manual__{{execution_date}}로 생성됨
+        reset_dag_run=True, # 이미 run id 값이 있는 경우에도 재수행을 하는지.
         wait_for_completion=False, # True이면 trigger_dag_id의 dag_run이 완료될 때까지 대기함
         poke_interval=60, 
         allowed_states=['success'], # trigger_dag_id의 dag_run이 success 상태일 때만 trigger됨
