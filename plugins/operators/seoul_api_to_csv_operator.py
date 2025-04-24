@@ -4,6 +4,7 @@ import pandas as pd
 
 
 class SeoulApiToCsvOperator(BaseOperator):
+    template_fields = ('endpoint', 'path','file_name','base_dt')
 
 
     def __init__(self, dataset_nm, path, file_name, base_dt = None, **kwargs):
@@ -22,7 +23,7 @@ class SeoulApiToCsvOperator(BaseOperator):
         connection = BaseHook.get_connection(self.http_conn_id)
 
         ## 이전에 ui 에서 등록할때 port 까지 같이 host에 등록했기 때문에 수정 필요?
-        # self.base_url = f"http://{connection.host}:{connection.port}/{self.endpoit}"
+        # self.base_url = f"http://{connection.host}:{connection.port}/{self.endpoint}"
         self.base_url = f"http://{connection.host}{self.endpoint}"
 
         total_row_df = pd.DataFrame()
