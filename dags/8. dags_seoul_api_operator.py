@@ -40,7 +40,7 @@ docker-compose.yml 에서 volumes 설정을 해줘야 한다.
 airflow folder에서 plugins, dags 폴더는 이미 연결이 되어있다.
 yaml 파일에 volumes에 보면 : 기준으로 왼쪽이 wsl, 오른쪽이 container의 경로이다.
 volumes에 아래를 추가한다.
-{AIRFLOW_PROJ_DIR:-.}/airflow-mc/files:opt/airflow/files
+{AIRFLOW_PROJ_DIR:-.}/airflow-mc/files:/opt/airflow/files
 
 
 docker에 airflow-airflow-worker-1 컨테이너 안에 들어가려면
