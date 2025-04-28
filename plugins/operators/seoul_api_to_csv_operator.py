@@ -22,10 +22,10 @@ class SeoulApiToCsvOperator(BaseOperator):
         # 이전에 ui에서 등록한 variable을 가져옴
         connection = BaseHook.get_connection(self.http_conn_id)
 
-        ## 이전에 ui 에서 등록할때 port 까지 같이 host에 등록했기 때문에 수정 필요?
         # self.base_url = f'http://{connection.host}:{connection.port}/{self.endpoint}' ### 원코드
+        ## 이전에 ui 에서 등록할때 port 까지 같이 host에 등록했기 때문에 수정 필요
+        # connection 에 host가 	http://openapi.seoul.go.kr:8088/ 이렇게 등록되어있기 때문에 중복이 나지 않도록 수정
         self.base_url = f'{connection.host}{self.endpoint}'  ## 수정된 base_url
-
         print(self.base_url)
 
         total_row_df = pd.DataFrame()
