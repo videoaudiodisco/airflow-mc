@@ -7,7 +7,7 @@ import pendulum
 with DAG(
     dag_id='dags_python_with_postgres_hook_bulk_load',
     start_date=pendulum.datetime(2025,4,1, tz='Asia/Seoul'),
-    schedule="0 7 * * *", # soul_api_opeartor.py와 동일하게 설정
+    schedule="0 6 * * *", # soul_api_opeartor.py와 동일하게 설정
     catchup=False
 ) as dag:
 
