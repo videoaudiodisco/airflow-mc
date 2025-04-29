@@ -7,7 +7,7 @@ import pendulum
 with DAG(
     dag_id='dags_python_with_postgres_hook_bulk_load',
     start_date=pendulum.datetime(2025,4,1, tz='Asia/Seoul'),
-    schedule="0 6 * * *", # soul_api_opeartor.py와 동일하게 설정
+    schedule="0 7 * * *", # soul_api_opeartor.py와 동일하게 설정
     catchup=False
 ) as dag:
 
@@ -26,3 +26,6 @@ with DAG(
         }
     )   
     # data_interval_end 는 batch가 도는 날짜, 시점 --> 즉, 오늘 날짜 폴더에서 가지고 온다.
+    # 단 schedule 이 어떻게 설정되어있느냐에 따라 달라진다. 
+    # 예를 들어, 0 7 * * *  으로 설정되어있고, 4.30 6:30에 돌린다면 data_interval_end는 4.29 07:00가 된다. data_interval_start는 4.28 07:00
+    # 반면 4.30 7:30 에 돌린다면, data_interval_end는 4.30 07:00가 된다. data_interval_start는 4.29 07:00 
