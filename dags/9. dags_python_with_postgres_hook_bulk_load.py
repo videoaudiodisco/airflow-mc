@@ -16,6 +16,9 @@ with DAG(
         postgres_hook.bulk_load(tbl_nm, file_nm)
         # bulk_load는 file_nm에 있는 파일을 읽어서 tbl_nm에 넣는 것.
 
+    # 문제점 : "난지 1,2,3,4 주차장" 은 하나의 컬럼으로 들어가야 하는데, 이것이 csv --> tsv가 되면서 나뉜다.
+    # 해결법 : custom hook 만들기
+    
     insrt_postgres = PythonOperator(
         task_id = 'insrt_postgres',
         python_callable= insrt_postgres,
