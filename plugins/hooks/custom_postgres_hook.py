@@ -11,7 +11,7 @@ class CustomPostgresHook(BaseHook):
     def get_conn(self):
         # BaseHook을 상속할 때 get_conn을 쓰려면 반드시 재정의 필요. 안쓰면 안해도 됨
         # DB와의 연결 세션 객체인 self.postgres_conn 리턴한다.
-        if not self.conn:
+        if not self.postgres_conn:
             airflow_conn = self.get_connection(self.postgres_conn_id)
             # 중요! 이것은 airflow ui 화면을 통해 등록한 postgres 로그인 정보가 담긴 변수
             # self.postgres_conn 과 다르다!
