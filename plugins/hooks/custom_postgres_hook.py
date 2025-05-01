@@ -4,30 +4,28 @@ import pandas as pd
 
 class CustomPostgresHook(BaseHook):
 
-    def __init__(self, postgres_conn_id, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, postgres_conn_id, **kwargs):
         self.postgres_conn_id = postgres_conn_id
 
     def get_conn(self):
         # BaseHook을 상속할 때 get_conn을 쓰려면 반드시 재정의 필요. 안쓰면 안해도 됨
         # DB와의 연결 세션 객체인 self.postgres_conn 리턴한다.
-        if not self.postgres_conn:
-            airflow_conn = self.get_connection(self.postgres_conn_id)
-            # 중요! 이것은 airflow ui 화면을 통해 등록한 postgres 로그인 정보가 담긴 변수
-            # self.postgres_conn 과 다르다!
-            self.host = airflow_conn.host
-            self.user = airflow_conn.login
-            self.password = airflow_conn.password
-            self.dbname = airflow_conn.schema
-            self.port = airflow_conn.port
+        airflow_conn = self.get_connection(self.postgres_conn_id)
+        # 중요! 이것은 airflow ui 화면을 통해 등록한 postgres 로그인 정보가 담긴 변수
+        # self.postgres_conn 과 다르다!
+        self.host = airflow_conn.host
+        self.user = airflow_conn.login
+        self.password = airflow_conn.password
+        self.dbname = airflow_conn.schema
+        self.port = airflow_conn.port
 
-            self.postgres_conn = psycopg2.connect(
-                host=self.host,
-                user=self.user,
-                password=self.password,
-                dbname=self.dbname,
-                port=self.port
-            )
+        self.postgres_conn = psycopg2.connect(
+            host=self.host,
+            user=self.user,
+            password=self.password,
+            dbname=self.dbname,
+            port=self.port
+        )
         return self.postgres_conn
 
     ## customized bulk_load method
