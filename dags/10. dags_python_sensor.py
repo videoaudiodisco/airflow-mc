@@ -21,7 +21,7 @@ with DAG(
     def check_api_update(http_conn_id, endpoint, base_dt_col, **kwargs):
         # http_conn_id = 'openapi.seoul.go.kr'
         # endpoint = api_key/json/TbUseDaystatusView
-        # base_dt_col = '날짜'
+        # base_dt_col = 'DT' ## 날짜 컬럼명
         import requests
         import json
         from dateutil import relativedelta
@@ -35,6 +35,7 @@ with DAG(
         contents = json.loads(response.text)
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
+        print(f'row_data: {row_data}')
 
         last_dt = row_data[0].get(base_dt_col) # 첫 행에서 날짜 부분의 값을 가져온다. 2025/05/01 이런 형태임
         last_date = last_dt.replace('.', '-').replace('/', '-')
@@ -60,7 +61,7 @@ with DAG(
         op_kwargs = {
             'http_conn_id': 'openapi.seoul.go.kr',
             'endpoint': '{{var.value.apikey_openapi_seoul_go_kr}}/json/TbUseDaystatusView',
-            'base_dt_col': '날짜'
+            'base_dt_col': 'DT'
         },
         poke_interval = 60 * 10, # 10분마다 확인
         mode = 'reschedule',
