@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator, BranchPythonOperator
 
 with DAG(
     dag_id="dags_branch_python_operator",
-    schedule="30 6 * * *",
+    schedule="0 1 * * *",
     start_date=pendulum.datetime(2025, 4, 1, tz="Asia/Seoul"),
     catchup=False,
 ) as dag:
@@ -23,7 +23,7 @@ with DAG(
         
     ## BranchPythonOperator에 들어가는 python_callable은 return 으로 task_id를 return
     ## 그 아래에는 각각의 task_id를 지니는 PythonOperator가 존재해야 함
-        
+    # BranchPythonOperator : 분개하는 역할을 하는 operator
     python_branch_task = BranchPythonOperator(
         task_id='python_branch_task',
         python_callable=select_random,

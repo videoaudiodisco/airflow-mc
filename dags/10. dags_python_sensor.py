@@ -18,6 +18,7 @@ with DAG(
     catchup=False
 ) as dag:
     
+    # 이 함수는 거의 그대로 모든 데이터에 사용 가능하다.
     def check_api_update(http_conn_id, endpoint, base_dt_col, **kwargs):
         # http_conn_id = 'openapi.seoul.go.kr'
         # endpoint = api_key/json/TbUseDaystatusView
