@@ -28,7 +28,7 @@ with DAG(
 
         connection = BaseHook.get_connection(http_conn_id)
         # url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100/' ## 원코드
-        url = f'http://{connection.host}{endpoint}/1/100/'  ## ui에서 host를 :port/까지 같이 정의했으므로 이렇게 변경
+        url = f'{connection.host}{endpoint}/1/100/' ## ui에서 host를 :port/까지 같이 정의했으므로 이렇게 변경
         # 데이터가 날짜 내림차순으로 되어있으므로 첫 100개 행만 가져와도 된다.
         response = requests.get(url)
 
