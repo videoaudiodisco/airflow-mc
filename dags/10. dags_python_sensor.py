@@ -28,7 +28,8 @@ with DAG(
 
         connection = BaseHook.get_connection(http_conn_id)
         # url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100/' ## 원코드
-        url = f'http://{connection.host}/{endpoint}/1/100/'  ## ui에서 host를 :port/까지 같이 정의했으므로 이렇게 변경
+        url = f'http://{connection.host}{endpoint}/1/100/'  ## ui에서 host를 :port/까지 같이 정의했으므로 이렇게 변경
+        # 데이터가 날짜 내림차순으로 되어있으므로 첫 100개 행만 가져와도 된다.
         response = requests.get(url)
 
         contents = json.loads(response.text)
@@ -52,7 +53,7 @@ with DAG(
             print(f'공공데이터 Update 미완료(배치 시작 날짜: {yesterday_ymd} / API Last 날짜: {last_date})')
             return False
         
-        
+
     sensor_task = PythonSensor(
         task_id = 'sensor_task',
         python_callable=check_api_update,
