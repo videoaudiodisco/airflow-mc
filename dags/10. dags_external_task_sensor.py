@@ -37,3 +37,7 @@ with DAG(
         execution_delta=timedelta(hours=6),
         poke_interval=10        #10초
     )
+
+    # default는 allowed_states가 success 일때 sensor가 성공한다.
+    # failed_states나 skipped_states가 따로 지정되어있지 않다면, allowed_state가 나올때까지 running(연두색) 상태
+    

@@ -51,3 +51,5 @@ with DAG(
     )   
 
     python_branch_task >> [task_a, task_b, task_c]
+    # 만약 select_random에서 A가 선택되면 task_a는 success, task_b와 task_c는 skip
+    # select_random에서 B,C 가 선택되면 task _a는 skip, task_b와 task_c는 success

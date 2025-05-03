@@ -44,7 +44,7 @@ with DAG(
             pendulum.from_format(last_date, 'YYYY-MM-DD')
         except:
             from airflow.exceptions import AirflowException
-            AirflowException(f"{bast_dt_col} 컬럼의 날짜 형식이 YYYY.MM.DD 또는 YYYY/MM/DD 형태가. {last_dt}")
+            AirflowException(f"{base_dt_col} 컬럼의 날짜 형식이 YYYY.MM.DD 또는 YYYY/MM/DD 형태가. {last_dt}")
 
         # 한강주차장 데이터는 어제일자로 업데이트가 되므로, 그것이 제대로 되었는지 확인. 오늘 날짜로 하면 안된다.
         yesterday_ymd = kwargs.get('data_interval_end').in_timezone('Asia/Seoul').subtract(days=1).format('YYYY-MM-DD')
