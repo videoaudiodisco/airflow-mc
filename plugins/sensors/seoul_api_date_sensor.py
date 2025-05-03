@@ -53,7 +53,7 @@ class SeoulApiDateSensor(BaseSensorOperator):
             AirflowException(f"{self.base_dt_col} 컬럼의 날짜 형식이 YYYY.MM.DD 또는 YYYY/MM/DD 형태가. {last_dt}")
 
         # 보통 서울시 공공데이터는 어제일자로 업데이트가 되므로, 그것이 제대로 되었는지 확인. 오늘 날짜로 하면 안된다.
-        # 그런 경우에 day_off를 1로 설정하면 된다.
+        # 그런 경우에 day_off를 -1로 설정하면 된다.
         search_ymd = (context.get('data_interval_end').in_timezone('Asia/Seoul') + relativedelta(days=self.day_off)).strftime('%Y-%m-%d')
         
         

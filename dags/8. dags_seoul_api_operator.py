@@ -20,7 +20,7 @@ with DAG(
         file_name='TbUseDaystatusView.csv'
     )
     
-    '''서울특별시 공공자전거 신규가입자 정보(일별)'''
+    '''서울특별시 공공자전거 신규가입자 정보(일별) --> 이건 업데이트 안되고 있어서 비교 가능'''
     seoul_bike_daily_status = SeoulApiToCsvOperator(
         task_id='cycleNewMemberRentInfoDay',
         dataset_nm='cycleNewMemberRentInfoDay',
