@@ -20,7 +20,7 @@ with DAG(
     cycleNewMemberRentInfoDay_sensor = SeoulApiDateSensor(
         task_id='cycleNewMemberRentInfoDay_sensor',
         dataset_nm='cycleNewMemberRentInfoDay',
-        base_dt_col='DT',
+        base_dt_col='RSLT_SE',
         day_off = -1,
         poke_interval = 600,
         mode = 'reschedule',
