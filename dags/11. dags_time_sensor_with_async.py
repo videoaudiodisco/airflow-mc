@@ -13,6 +13,8 @@ with DAG(
     # dag를 실행하면 running --> deffered 상태로 변경된다. 왜? task들이 대기하는 것이 아니라, triggerer를 기다리고 있기 때문에 
     # Browse --> Triggers 에 들어가면 trigger가 7개 생성되어있다.
     # Pools에 들어가도 개수 변화가 없다. 왜냐하면 deffered 상태이기 때문에 pool(slot)을 사용하지 않기 때문이다.
+
+    # 작업완료되면 triggerer는 사라진다.
 ) as dag:
     sync_sensor = DateTimeSensorAsync(
         task_id="sync_sensor",
