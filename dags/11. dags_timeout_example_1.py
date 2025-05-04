@@ -24,6 +24,7 @@ with DAG(
 
     # 30초를 sleep하는 task인데, execution_timeout이 20초로 설정되어있다.
     # 따라서 failure가 발생한다.
+    # 이 task가 fail이 되므로, 이메일 발송송
     bash_sleep_30 = BashOperator(
         task_id= 'bash_sleep_30',
         bash_command='sleep 30',
@@ -31,6 +32,7 @@ with DAG(
 
     # 10초를 sleep하는 task인데, execution_timeout이 20초로 설정되어있다.
     # 따라서 정상적으로 수행된다.
+    # 이 task는 성공이므로, 이메일 발송이 되지 않는다.
     bash_sleep_10 = BashOperator(
         trigger_rule='all_done',
         task_id= 'bash_sleep_10',
