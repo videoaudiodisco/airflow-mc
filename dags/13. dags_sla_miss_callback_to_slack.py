@@ -22,19 +22,20 @@ with DAG(
         task_id='task_slp100_sla180',
         bash_command='sleep 100',
         sla=timedelta(minutes=3)
-    )
+    ) # sla miss
 
     task_slp60_sla245 = BashOperator(
         task_id='task_slp60_sla245',
         bash_command='sleep 60',
         sla=timedelta(seconds=245)
-    )
+    ) # sla miss 되어야 하지만, 실제 slack 알람이 오지 않음. sla miss 는 엄격하게 관리되지 않는다.
+    # 또 한번 다시 돌려보면 정상적으로 되기도 한다.
 
     task_slp60_sla250 = BashOperator(
         task_id='task_slp60_sla250',
         bash_command='sleep 60',
         sla=timedelta(seconds=250)
-    )
+    ) # sla miss
 
     task_slp100_sla120 >> task_slp100_sla180 >> task_slp60_sla245 >> task_slp60_sla250
 
